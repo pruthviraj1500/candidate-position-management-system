@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS candidate_position_management_system;
+USE candidate_position_management_system;
