@@ -1,9 +1,7 @@
 package com.programming.candidate_position_management_system.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,7 +18,8 @@ public class Position extends BaseEntity{
     @Column(length = 50, unique = true, nullable = false)
     private String positionName;
 
-    @ManyToMany(mappedBy = "positions")
+    @ManyToMany(mappedBy = "positions", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Candidate> candidates;
 
 }
