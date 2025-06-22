@@ -1,5 +1,6 @@
 package com.programming.candidate_position_management_system.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -25,12 +25,13 @@ public class Candidate extends BaseEntity{
     @Column(nullable = false)
     private LocalDate dob;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "candidate_position",
             joinColumns = @JoinColumn(name = "candidate_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
+    @JsonManagedReference
     private List<Position> positions;
 
 }
